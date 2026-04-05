@@ -1,0 +1,17 @@
+Pro zapnutí je potřebná instalace balíčku a to buď každý zvlášť:
+flask
+flask-bcrypt
+mysql-connector-python
+PyQt5
+
+nebo za použití  pip install -r requirements.txt
+
+Admin app je v admin_app, kde stačí zapnout main.py ve kterém se přihlásíte za pomocí 
+jména: admin
+hesla: admin
+
+pro zapnutí testu, zadat do terminálu:
+
+python -m unittest test_app.py
+
+pro zapnutí eshopové stránky je potřeba zapnout run.py
