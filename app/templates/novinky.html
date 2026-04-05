@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Novinky – FLOSE{% endblock %}
+
+{% block content %}
+<section class="news-section">
+    <h1 class="section-title" style="margin-top: 0;">Novinky a aktuality</h1>
+    
+    {% if news %}
+        <div class="news-list">
+            {% for item in news %}
+            <div class="news-card">
+                <div class="news-date">{{ item['date'] }}</div>
+                <h2>{{ item['title'] }}</h2>
+                <p>{{ item['content'] }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="no-news">Zatím žádné novinky – brzy přidáme!</p>
+    {% endif %}
+</section>
+{% endblock %}
