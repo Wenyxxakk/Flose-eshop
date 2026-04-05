@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Domů – FLOSE{% endblock %}
+
+{% block content %}
+<section class="hero" style="background-image: url('{{ url_for('static', filename='images/background.jpg') }}');">
+    <h1>FLOSE FOOTBALL GEAR</h1>
+    <h2>Luxusní vybavení pro váš výkon</h2>
+    <p style="color: #cbd5e1; font-size: 1.1rem; max-width: 600px; margin: 0 auto;">Prémiová fotbalová kolekce pro hráče, kteří chtějí kvalitu, styl a výkon bez kompromisů.</p>
+</section>
+
+<div class="container">
+    <h2 class="section-title">Nejoblíbenější</h2>
+
+    <section class="products">
+        {% if products and products|length > 0 %}
+            {% for product in products[:3] %}
+                <div class="product-card" style="position: relative;">
+
+                    {% if product.discount_percent and product.discount_percent > 0 %}
+                        <div class="discount-badge">-{{ product.discount_percent }} %</div>
+                    {% endif %}
+
+                    <a href="{{ url_for('product_detail', product_id=product.id) }}" class="product-link">
+                        {% if product.image_url %}
+                            <img src="{{ url_for('static', filename='images/' + product.image_url) }}"
+                                 alt="{{ product.name }}"
+                                 class="product-img">
+                        {% else %}
+                            <img src="{{ url_for('static', filename='images/placeholder.jpg') }}"
+                                 alt="{{ product.name }}"
+                                 class="product-img">
+                        {% endif %}
+
+                        <div class="product-info">
+                            <h3>{{ product.name | replace('-', ' ') | replace('/', ' ') }}</h3>
+
+                            {% if product.discount_percent and product.discount_percent > 0 %}
+                                {% set sleva_castka = (product.price * product.discount_percent / 100) %}
+                                {% set nova_cena = product.price - sleva_castka %}
+
+                                <div class="price-wrapper">
+                                    <span class="old-price">{{ product.price }} Kč</span>
+                                    <span class="new-price">{{ nova_cena | round(2) }} Kč</span>
+                                </div>
+                            {% else %}
+                                <p class="price">{{ product.price }} Kč</p>
+                            {% endif %}
+                        </div>
+                    </a>
+
+                </div>
+            {% endfor %}
+        {% else %}
+            <p style="color: #94a3b8; text-align: center; grid-column: 1 / -1; padding: 3rem 0;">Zatím žádné produkty v databázi.</p>
+        {% endif %}
+    </section>
+</div>
+{% endblock %}
