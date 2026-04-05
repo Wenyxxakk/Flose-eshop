@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Můj profil – FLOSE{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+
+    <h1 class="section-title" style="margin-top: 0;">Můj profil</h1>
+
+    <div class="profile-tabs">
+        <a href="{{ url_for('profile') }}" class="profile-tab {% if active_tab == 'orders' or active_tab is none %}active{% endif %}">
+            Historie objednávek
+        </a>
+        <a href="{{ url_for('my_reviews') }}" class="profile-tab {% if active_tab == 'reviews' %}active{% endif %}">
+            Moje recenze
+        </a>
+    </div>
+
+    {% if active_tab == 'orders' or active_tab is none %}
+        {% if orders and orders|length > 0 %}
+            <div class="orders-list">
+                {% for order in orders %}
+                <div class="order-simple-card">
+                    <div class="order-simple-header">
+                        <strong>Objednávka #{{ order.id }}</strong>
+                        <span style="color: #94a3b8;">{{ order.order_date.strftime('%d.%m.%Y %H:%M') }}</span>
+                    </div>
+
+                    {% for item in order.order_products %}
+                    <div class="order-simple-item">
+                        <span>{{ item.name | replace('-', ' ') | replace('/', ' ') }} &times; {{ item.quantity }}</span>
+                        <span>{{ (item.price_at_time * item.quantity)|round(2) }} Kč</span>
+                    </div>
+                    {% endfor %}
+
+                    <div class="order-simple-total">
+                        Celkem: {{ order.total_price }} Kč
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert" style="background: #111827; border: 1px solid #1f2937; color: #94a3b8;">
+                Zatím nemáte žádné dokončené objednávky.
+            </div>
+        {% endif %}
+    {% endif %}
+
+    {% if active_tab == 'reviews' %}
+        {% if reviews and reviews|length > 0 %}
+            <div class="reviews-list">
+                {% for review in reviews %}
+                <div class="order-simple-card">
+                    <div class="order-simple-header" style="border-bottom: none; padding-bottom: 0;">
+                        <strong style="font-size: 1.1rem;">{{ review.product_name | replace('-', ' ') | replace('/', ' ') }}</strong>
+                        <span class="review-rating" style="color: #fbbf24;">{{ '★' * review.rating }}</span>
+                    </div>
+                    <p style="color: #cbd5e1; margin: 1rem 0;">{{ review.comment }}</p>
+                    <small style="color: #64748b;">Napsáno: {{ review.created_at.strftime('%d.%m.%Y') }}</small>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert" style="background: #111827; border: 1px solid #1f2937; color: #94a3b8;">
+                Zatím jste nenapsali žádnou recenzi.
+            </div>
+        {% endif %}
+    {% endif %}
+
+</div>
+{% endblock %}
