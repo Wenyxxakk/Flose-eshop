@@ -1,0 +1,1095 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', system-ui, sans-serif;
+    background: #0a0e17; /* Zpět k tvé oblíbené syté tmavě modré/černé */
+    color: #d8e2f0;
+    line-height: 1.6;
+}
+
+/* =========================================
+   NAVBAR (Tvůj původní layout + srovnání do roviny)
+   ========================================= */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Tohle drží vše v jedné lince */
+    background: #000;
+    padding: 1rem 4rem;
+    border-bottom: 1px solid #222;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo a {
+    color: white;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+.nav-left, .nav-center, .nav-right {
+    display: flex;
+    align-items: center;
+}
+
+.nav-left {
+    flex: 1;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2.5rem;
+    margin: 0;
+    align-items: center;
+}
+
+.nav-links a {
+    color: #ccc;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: white;
+}
+
+.nav-center {
+    flex: 2;
+    justify-content: center;
+}
+
+.nav-right {
+    flex: 1;
+    justify-content: flex-end;
+}
+
+.nav-auth {
+    list-style: none;
+    display: flex;
+    gap: 1.8rem;
+    align-items: center;
+    margin: 0;
+}
+
+.nav-auth a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+}
+
+.nav-auth a:hover {
+    color: white;
+}
+
+.username {
+    color: #93c5fd;
+    font-weight: 500;
+}
+
+.cart-link {
+    color: #cbd5e1;
+    transition: color 0.2s ease;
+}
+
+.cart-link:hover,
+.cart-link.active {
+    color: #60a5fa;
+}
+
+/* =========================================
+   VYHLEDÁVÁNÍ V NAVIGACI
+   ========================================= */
+.search-form {
+    display: flex;
+    width: 100%;
+    max-width: 400px;
+    align-items: stretch;
+}
+
+.search-form input[type="text"],
+.search-form input {
+    flex: 1;
+    padding: 0.6rem 1rem;
+    border: 1px solid #333;
+    border-right: none;
+    border-radius: 4px 0 0 4px !important;
+    background: #111;
+    color: white;
+    font-size: 0.95rem;
+    margin: 0;
+    max-width: none;
+    transition: border-color 0.2s;
+}
+
+.search-form input:focus {
+    outline: none;
+    border-color: #60a5fa;
+}
+
+.search-form button,
+.search-form button[type="submit"] {
+    background: #222;
+    color: #ccc;
+    border: 1px solid #333;
+    padding: 0 1.2rem;
+    border-radius: 0 4px 4px 0 !important;
+    cursor: pointer;
+    margin-top: 0 !important;
+    transition: background 0.2s, color 0.2s;
+}
+
+.search-form button:hover,
+.search-form button[type="submit"]:hover {
+    background: #333;
+    color: white;
+}
+
+Tady je přesně ta část upravená tak, aby podporovala fotku na pozadí, měla přes ni jemný tmavý filtr (aby byl ten bílý text vždycky krásně čitelný) a obsahovala i styl pro ten nový nadpis nad produkty.
+
+Vezmi tenhle kód a nahraď jím tu svou současnou sekci /* ========================================= ROZVRŽENÍ & HERO ========================================= */:
+
+CSS
+/* =========================================
+   ROZVRŽENÍ & HERO
+   ========================================= */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.hero {
+    text-align: center;
+    padding: 12rem 2rem 10rem; /* Zvětšeno, aby fotka hezky vynikla */
+    background-color: #000;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative; /* Důležité pro správné fungování tmavého filtru */
+}
+
+/* Jemný tmavý filtr přes obrázek, aby byl bílý text vždy perfektně čitelný */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(10, 14, 23, 0.7); /* Tmavá barva webu se 70% průhledností */
+    z-index: 1;
+}
+
+/* Texty musí vystoupit nad tmavý filtr */
+.hero h1,
+.hero h2,
+.hero p {
+    position: relative;
+    z-index: 2;
+}
+
+.hero h1 {
+    font-size: 4.2rem;
+    margin-bottom: 1.2rem;
+    color: #ffffff;
+    /* Hlavní trik: silný, rozmazaný stín pod hlavním nadpisem */
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.9);
+}
+
+.hero h2 {
+    font-size: 1.95rem;
+    color: #f1f5f9; /* Zesvětleno z původní šedé na téměř bílou */
+    margin-bottom: 2rem;
+    font-weight: 500; /* Trošku tučnější pro lepší čitelnost */
+    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.9);
+}
+
+.hero p {
+    color: #e2e8f0 !important; /* Vynutíme světlejší barvu i přes inline styly v HTML */
+    font-size: 1.15rem !important; /* O kapku větší text */
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+    font-weight: 400;
+}
+
+/* =========================================
+   NADPISY SEKCI (např. Nejoblíbenější)
+   ========================================= */
+.section-title {
+    text-align: center;
+    font-size: 2.2rem;
+    color: #ffffff;
+    margin: 4rem 0 2rem; /* Mezera od shora a od produktů */
+    font-weight: 600;
+}
+/* =========================================
+   KARTY PRODUKTŮ (Větší obrázek, menší popis)
+   ========================================= */
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 5rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* 1. Mřížka - auto-fill zajistí, že se jedna karta neroztáhne */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2.5rem;
+    justify-content: center; /* Vycentruje karty v řadě */
+    width: 100%;
+}
+
+/* 2. Karta - omezíme její maximální šířku */
+.product-card {
+    background: #111827;
+    border: 1px solid #1f2937;
+    border-radius: 8px;
+    overflow: hidden;
+    max-width: 340px; /* Tímhle zabráníme tomu, aby bota byla přes celý web */
+    width: 100%;
+    margin: 0 auto; /* Pojistka pro vycentrování, když je tam jen jedna */
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    border-color: #60a5fa; /* Decentní modrá při najetí */
+}
+
+.product-link {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Dominantní obrázek */
+.product-card img,
+.product-img {
+    width: 100%;
+    height: 320px; /* Zvětšeno z původních 240px */
+    object-fit: cover;
+    transition: filter 0.3s ease;
+}
+
+.product-link:hover img {
+    filter: brightness(1.08);
+}
+
+/* Kompaktní textová část */
+.product-info {
+    padding: 1rem 1.2rem; /* Menší odsazení */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.product-card h3 {
+    font-size: 1.1rem; /* Zmenšený název */
+    color: #e2e8f0;
+    margin-bottom: 0.4rem;
+    font-weight: 500;
+}
+
+.product-card .price,
+.product-card p {
+    font-size: 1.25rem; /* Upravená velikost ceny */
+    font-weight: 700;
+    color: #60a5fa;
+    margin: 0;
+    padding: 0;
+}
+
+/* =========================================
+   DETAIL PRODUKTU & PŘIDÁNÍ DO KOŠÍKU
+   ========================================= */
+
+/* Hlavní kontejner - rozdělení na levý a pravý sloupec */
+.product-detail-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dva stejné sloupce */
+    gap: 3rem; /* Krásně vzdušná mezera */
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 0 1.5rem;
+    align-items: start;
+}
+
+/* LEVÝ SLOUPEC: Obal pro obrázek */
+.product-detail-left {
+    background: #111827;
+    border-radius: 8px;
+    border: 1px solid #1f2937;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Samotný obrázek */
+.product-detail-image {
+    width: 100%;
+    height: 450px;
+    object-fit: contain;
+    border-radius: 0;
+    box-shadow: none; /* Čistý vzhled bez stínu */
+}
+
+/* PRAVÝ SLOUPEC: Informace, text a košík */
+.product-detail-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.product-detail-right h1 {
+    font-size: 2.2rem;
+    color: #ffffff;
+    margin-bottom: 0.2rem;
+    line-height: 1.2;
+}
+
+.product-detail-right .price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #60a5fa;
+}
+
+/* Popis produktu v pravém sloupci */
+.product-description {
+    background: transparent;
+    padding: 0;
+    border: none;
+    margin: 0;
+}
+
+.product-description p {
+    font-size: 1.05rem;
+    color: #cbd5e1;
+    line-height: 1.7;
+}
+
+/* Čistý a elegantní box pro přidání do košíku */
+.add-to-cart-box {
+    background: #111827;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #1f2937;
+}
+
+.add-to-cart-form {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.quantity-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.quantity-group label {
+    font-size: 0.9rem;
+    color: #94a3b8;
+}
+
+/* Společný styl pro formulářová pole */
+input[type="number"],
+input[type="text"],
+select,
+textarea {
+    padding: 0.7rem 1rem;
+    border: 1px solid #374151;
+    border-radius: 6px;
+    background: #0f172a;
+    color: #f1f5f9;
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+    width: 100%;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #60a5fa;
+    box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.2); /* Decentní modrá záře */
+}
+
+/* Omezení pro konkrétní políčka */
+.quantity-input,
+.add-to-cart-form input[type="number"] {
+    width: 70px !important; /* Malé, elegantní pole pro čísla */
+    text-align: center;
+    padding: 0.7rem 0.5rem;
+}
+
+textarea {
+    max-width: 100%;
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* Sekce recenzí úplně dole přes oba sloupce */
+.reviews-section {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 1.5rem;
+    grid-column: 1 / -1;
+}
+
+/* Responzivita - Na mobilech to hodí obrázek a info pod sebe */
+@media (max-width: 850px) {
+    .product-detail-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+/* =========================================
+   TLAČÍTKA (Světle modrá elegance)
+   ========================================= */
+button[type="submit"],
+input[type="submit"],
+.btn-add-to-cart,
+.btn-checkout,
+.btn-pay {
+    background: #3b82f6; /* Návrat k čisté modré */
+    color: white;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    appearance: none;
+    -webkit-appearance: none;
+    font-size: 0.95rem;
+}
+
+button[type="submit"]:hover,
+input[type="submit"]:hover,
+.btn-add-to-cart:hover,
+.btn-checkout:hover,
+.btn-pay:hover {
+    background: #2563eb;
+    transform: translateY(-1px); /* Jemný klik efekt */
+}
+
+/* =========================================
+   RECENZE (Menší a hezčí)
+   ========================================= */
+.review-card {
+    background: #111827;
+    border: 1px solid #1f2937;
+    border-radius: 8px;
+    padding: 1.2rem 1.5rem; /* Kompaktnější */
+    margin-bottom: 1rem;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.review-rating {
+    color: #fbbf24;
+    font-size: 1.1rem; /* Zmenšené hvězdičky */
+}
+
+.review-text {
+    font-size: 0.95rem; /* Zmenšený text recenze */
+    line-height: 1.5;
+    color: #cbd5e1;
+    margin-bottom: 0.5rem;
+}
+
+.review-date {
+    color: #64748b;
+    font-size: 0.85rem;
+}
+
+.review-form {
+    background: #111827;
+    border: 1px solid #1f2937;
+    border-radius: 8px;
+    padding: 1.5rem; /* Zmenšené odsazení */
+    margin-top: 2rem;
+}
+
+.review-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.review-form select {
+    width: auto;
+    min-width: 150px;
+    max-width: 250px;
+}
+
+/* =========================================
+   KOŠÍK A CHECKOUT
+   ========================================= */
+.cart-wrapper {
+    max-width: 1000px;
+    margin: 4rem auto;
+    padding: 0 2rem;
+}
+
+.cart-item {
+    background: #111827;
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    border: 1px solid #1f2937;
+}
+
+.cart-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.btn-remove {
+    color: #f87171;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.btn-remove:hover {
+    color: #ef4444;
+}
+
+.cart-total {
+    text-align: right;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #1f2937;
+}
+
+.discount-form {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.discount-form input {
+    max-width: 250px;
+}
+
+.discount-form button {
+    background: #1f2937;
+    color: #f1f5f9;
+}
+
+.discount-form button:hover {
+    background: #374151;
+}
+
+.checkout-wrapper {
+    max-width: 1100px;
+    margin: 5rem auto;
+    padding: 0 1.5rem;
+}
+
+.checkout-container {
+    background: #111827;
+    border-radius: 8px;
+    padding: 3rem;
+    border: 1px solid #1f2937;
+}
+
+.checkout-container h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #e2e8f0;
+}
+
+.order-amount {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 3rem;
+    color: #60a5fa;
+}
+
+.payment-form-card {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.form-row {
+    margin-bottom: 1.5rem;
+}
+
+.form-row label {
+    display: block;
+    margin-bottom: 0.4rem;
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+.form-row-group {
+    display: flex;
+    gap: 1rem;
+}
+
+.half {
+    flex: 1;
+}
+
+.sim-note {
+    text-align: center;
+    margin-top: 2rem;
+    color: #64748b;
+    font-size: 0.85rem;
+}
+
+.back-link {
+    display: block;
+    text-align: center;
+    margin-top: 2rem;
+    color: #60a5fa;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+/* =========================================
+   AUTENTIZACE
+   ========================================= */
+.auth-wrapper {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.auth-card {
+    background: #111827;
+    border-radius: 8px;
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 420px;
+    border: 1px solid #1f2937;
+}
+
+.auth-card h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #e2e8f0;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+}
+
+.form-group label {
+    color: #94a3b8;
+    font-weight: 500;
+    margin-bottom: 0.4rem;
+    display: block;
+    font-size: 0.9rem;
+}
+
+.auth-switch {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #9ca3af;
+    font-size: 0.9rem;
+}
+
+.auth-switch a {
+    color: #60a5fa;
+    text-decoration: none;
+}
+
+.auth-switch a:hover {
+    text-decoration: underline;
+}
+
+.login-notice {
+    margin-bottom: 2rem;
+}
+
+.btn-outline-light {
+    background: transparent;
+    color: #f1f5f9 !important;
+    border: 1px solid #64748b !important;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-outline-light:hover {
+    border-color: #ffffff !important;
+    color: #ffffff !important;
+}
+
+/* =========================================
+   NOVINKY, ALERT A FOOTER
+   ========================================= */
+.news-section {
+    max-width: 1100px;
+    margin: 5rem auto;
+    padding: 0 2rem;
+}
+
+
+}
+
+.news-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.news-card {
+    background: #111827;
+    border-radius: 8px;
+    padding: 2rem;
+    border-left: 4px solid #1f2937;
+    transition: border-left-color 0.3s ease;
+}
+
+.news-card:hover {
+    border-left-color: #60a5fa;
+}
+
+.news-date {
+    display: block;
+    color: #9ca3af;
+    font-size: 0.85rem;
+    margin-bottom: 0.6rem;
+}
+
+.news-card h2 {
+    font-size: 1.4rem;
+    color: #f1f5f9;
+    margin: 0 0 0.8rem 0;
+}
+
+.news-content {
+    color: #cbd5e1;
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.no-news {
+    text-align: center;
+    padding: 6rem 2rem;
+    color: #6b7280;
+    font-size: 1.1rem;
+}
+
+.alert {
+    padding: 1rem 1.5rem;
+    margin: 1.5rem auto;
+    max-width: 900px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.alert-success {
+    background: rgba(20, 83, 45, 0.4);
+    color: #bbf7d0;
+    border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.alert-error {
+    background: rgba(127, 29, 29, 0.4);
+    color: #fecaca;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.card {
+    background: #111827;
+    border: 1px solid #1f2937;
+    border-radius: 8px;
+}
+
+.row.g-5 {
+    align-items: flex-start;
+}
+
+.nav-tabs .nav-link {
+    color: #94a3b8;
+}
+
+.nav-tabs .nav-link.active {
+    color: #ffffff;
+    border-color: #60a5fa;
+}
+
+footer {
+    background: #000;
+    padding: 2rem;
+    text-align: center;
+    color: #6b7280;
+    border-top: 1px solid #1f2937;
+    margin-top: 4rem;
+}
+/* Globální odsazení pro stránky, kde není velká úvodní fotka */
+main {
+    padding-top: 0rem; /* Tímhle to posuneme kousek níž od navbaru */
+    padding-bottom: 5rem;
+}
+
+/* Pojistka, aby mřížka produktů byla na střed a nerozjížděla se */
+.products, .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2.5rem; /* Trošku větší mezera mezi kartami */
+    max-width: 1200px;
+    margin: 0 auto; /* Vycentruje samotný kontejner */
+    justify-content: center; /* Vycentruje karty, pokud nevyplní celou řadu */
+}
+/* =========================================
+   PROFIL UŽIVATELE (Čistý, jednoduchý a na střed)
+   ========================================= */
+.profile-container {
+    max-width: 700px; /* Výrazné zúžení pro perfektní vycentrování na střed */
+    margin: 4rem auto 5rem auto;
+    padding: 0 1.5rem;
+}
+
+.profile-tabs {
+    display: flex;
+    justify-content: center; /* Vycentrování samotných záložek */
+    gap: 2.5rem;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid #1f2937;
+    padding-bottom: 1rem;
+}
+
+.profile-tab {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 0.5rem 0;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.profile-tab:hover {
+    color: #e2e8f0;
+}
+
+.profile-tab.active {
+    color: #60a5fa; /* Jen jemná modrá barva a podtržení */
+    border-bottom-color: #60a5fa;
+}
+
+/* Zjednodušené kartičky objednávek (bez zbytečných hlaviček a patiček) */
+.order-simple-card {
+    background: #111827;
+    border: 1px solid #1f2937;
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+}
+
+.order-simple-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #1f2937;
+}
+
+.order-simple-header strong {
+    color: #f1f5f9;
+    font-size: 1.1rem;
+}
+
+.order-simple-item {
+    display: flex;
+    justify-content: space-between;
+    color: #cbd5e1;
+    margin-bottom: 0.6rem;
+    font-size: 1rem;
+}
+
+.order-simple-total {
+    margin-top: 1.2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #1f2937;
+    text-align: right;
+    color: #60a5fa;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+/* Kontejner pro Login / Registraci */
+.auth-container {
+    max-width: 400px;
+    margin: 6rem auto;
+    background: #111827; /* Tmavé pozadí karty */
+    padding: 2.5rem;
+    border-radius: 12px;
+    border: 1px solid #1f2937;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.auth-container h2 {
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+/* Skupiny polí a popisky */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+/* Vstupy - podpora pro všechna pole */
+.auth-container input[type="text"],
+.auth-container input[type="password"],
+.auth-container input[type="email"] {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background: #0f172a;
+    border: 1px solid #374151;
+    border-radius: 8px;
+    color: #f1f5f9;
+    font-family: inherit;
+    transition: all 0.2s;
+}
+
+.auth-container input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+/* Tlačítko */
+.auth-btn {
+    width: 100%;
+    padding: 0.9rem;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 1rem;
+}
+
+.auth-btn:hover {
+    background: #2563eb;
+}
+
+/* Odkaz dole */
+.auth-footer {
+    text-align: center;
+    margin-top: 1.8rem;
+    color: #94a3b8;
+    font-size: 0.95rem;
+}
+
+.auth-footer a {
+    color: #60a5fa;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Styl pro chybové hlášky (Flash) */
+.alert-mini {
+    padding: 0.8rem;
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    text-align: center;
+    background: rgba(239, 68, 68, 0.1);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+/* Slevový štítek na obrázku */
+.discount-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ef4444; /* Prémiová červená */
+    color: white;
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    z-index: 10;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Kontejner pro starou a novou cenu vedle sebe */
+.price-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-top: 0.5rem;
+}
+
+/* Přeškrtnutá původní cena */
+.old-price {
+    color: #94a3b8;
+    text-decoration: line-through;
+    font-size: 0.95rem;
+}
+
+/* Nová akční cena */
+.new-price {
+    color: #ef4444;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
