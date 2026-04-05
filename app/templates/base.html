@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}FLOSE{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-left" style="gap: 2.5rem;"> <div class="logo">
+                <a href="{{ url_for('index') }}">FLOSE</a>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="{{ url_for('produkty') }}" class="{% if request.path == url_for('produkty') %}active{% endif %}">Produkty</a></li>
+                <li><a href="{{ url_for('novinky') }}" class="{% if request.path == url_for('novinky') %}active{% endif %}">Novinky</a></li>
+            </ul>
+        </div>
+
+        <div class="nav-center">
+            <form action="{{ url_for('search') }}" method="GET" class="search-form">
+                <input type="text" name="q" placeholder="Hledej produkt..." required>
+                <button type="submit">Hledat</button>
+            </form>
+        </div>
+
+        <div class="nav-right">
+            <ul class="nav-auth">
+                {% if session.username %}
+                    <li>
+                        <a href="{{ url_for('profile') }}" class="username">
+                            Vítej, {{ session.username }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('cart') }}" title="Košík" class="cart-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="9" cy="21" r="1"></circle>
+                                <circle cx="20" cy="21" r="1"></circle>
+                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                            </svg>
+                        </a>
+                    </li>
+                    <li><a href="{{ url_for('logout') }}">Odhlásit se</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('login') }}">Přihlásit se</a></li>
+                    <li><a href="{{ url_for('register') }}">Registrace</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>© 2026 FLOSE </p>
+    </footer>
+</body>
+</html>
