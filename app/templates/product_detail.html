@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block title %}{{ product.name | replace('-', ' ') | replace('/', ' ') }} – FLOSE{% endblock %}
+
+{% block content %}
+<div class="product-detail-container">
+
+    <div class="product-detail-left">
+        {% if product.image_url %}
+            <img src="{{ url_for('static', filename='images/' + product.image_url) }}"
+                 class="product-detail-image"
+                 alt="{{ product.name }}">
+        {% else %}
+            <img src="{{ url_for('static', filename='images/placeholder.jpg') }}"
+                 class="product-detail-image"
+                 alt="{{ product.name }}">
+        {% endif %}
+    </div>
+
+    <div class="product-detail-right">
+        <h1>{{ product.name | replace('-', ' ') | replace('/', ' ') }}</h1>
+        <div class="price">{{ product.price }} Kč</div>
+
+        <div class="product-description">
+            <p>
+                {{ product.description | default("Popis produktu zatím není k dispozici.", true) }}
+            </p>
+        </div>
+
+        {% if session.username %}
+        <div class="add-to-cart-box">
+            <form action="{{ url_for('add_to_cart') }}" method="POST" class="add-to-cart-form">
+
+                <input type="hidden" name="product_id" value="{{ product.id }}">
+
+                <div class="quantity-group">
+                    <label>Množství:</label>
+                    <input type="number" name="quantity" value="1" min="1" class="quantity-input">
+                </div>
+                <button type="submit" class="btn-add-to-cart">
+                    Přidat do košíku
+                </button>
+            </form>
+        </div>
+        {% else %}
+        <div class="login-notice mt-3">
+            <a href="{{ url_for('login') }}" class="btn-outline-light">
+                Přihlaste se pro nákup
+            </a>
+        </div>
+        {% endif %}
+    </div>
+
+</div>
+
+<div class="reviews-section">
+    <h3 style="color: #ffffff; margin-bottom: 1.5rem;">Recenze zákazníků</h3>
+
+    {% if reviews %}
+        {% for review in reviews %}
+        <div class="review-card">
+            <div class="review-header">
+                <strong style="color: #e2e8f0;">{{ review.username }}</strong>
+                <span class="review-rating">{{ '★' * review.rating }}</span>
+            </div>
+            <p class="review-text">{{ review.comment }}</p>
+            <small class="review-date">{{ review.created_at.strftime('%d.%m.%Y') }}</small>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p style="color: #94a3b8;">Zatím žádné recenze. Buďte první!</p>
+    {% endif %}
+
+    {% if session.username %}
+    <div class="review-form">
+        <h4 style="color: #e2e8f0; margin-bottom: 1.2rem;">Přidat recenzi</h4>
+        <form method="POST" action="{{ url_for('add_review', product_id=product.id) }}">
+            <div style="margin-bottom: 1rem;">
+                <label style="color: #94a3b8; display: block; margin-bottom: 0.4rem; font-size: 0.9rem;">Hodnocení</label>
+                <select name="rating" required>
+                    <option value="5">5 ★★★★★</option>
+                    <option value="4">4 ★★★★☆</option>
+                    <option value="3">3 ★★★☆☆</option>
+                    <option value="2">2 ★★☆☆☆</option>
+                    <option value="1">1 ★☆☆☆☆</option>
+                </select>
+            </div>
+            <div style="margin-bottom: 1rem;">
+                <label style="color: #94a3b8; display: block; margin-bottom: 0.4rem; font-size: 0.9rem;">Vaše recenze</label>
+                <textarea name="comment" rows="4" placeholder="Napište svůj názor..."></textarea>
+            </div>
+            <button type="submit" class="btn-add-to-cart" style="width: auto;">Odeslat recenzi</button>
+        </form>
+    </div>
+    {% else %}
+    <div class="alert" style="background: #111827; border: 1px solid #1f2937; margin-top: 2rem;">
+        <span style="color: #94a3b8;">Pro přidání recenze se </span>
+        <a href="{{ url_for('login') }}" style="color: #60a5fa; text-decoration: none;">přihlaste</a>.
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}
