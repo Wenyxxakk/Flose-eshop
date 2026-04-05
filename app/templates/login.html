@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Přihlášení – FLOSE{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <h2>Přihlášení</h2>
+
+    <form method="POST" class="auth-form">
+        <div class="form-group">
+            <label for="username">Uživatelské jméno</label>
+            <input type="text" id="username" name="username" placeholder="Zadejte uživatelské jméno" required autofocus>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Heslo</label>
+            <input type="password" id="password" name="password" placeholder="••••••••" required>
+        </div>
+
+        <button type="submit" class="auth-btn">Přihlásit se</button>
+    </form>
+
+    <div class="auth-footer">
+        Nemáte účet? <a href="{{ url_for('register') }}">Zaregistrujte se</a>
+    </div>
+</div>
+{% endblock %}
